@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Banana Roll</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background-color: lightyellow;
+      overflow-x: hidden;
+    }
+
+    header {
+      background: lightpink;
+      padding: 1rem 2rem;
+      text-align: center;
+    }
+
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 3rem 2rem 1rem;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 2.5rem;
+      color: #0088a9;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero p {
+      margin: 1rem 0;
+    }
+
+    .hero img {
+      max-height: 300px;
+      width: 100%;
+      max-width: 400px;
+      height: auto;
+      border-radius: 12px;
+    }
+
+    .description {
+      padding: 0 2rem 2rem;
+      text-align: center;
+      font-size: 1rem;
+      color: #333;
+    }
+
+    .flavors {
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .flavors h2 {
+      color: #a6ebfc;
+      margin-bottom: 1rem;
+    }
+
+    .bananayoy {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .card {
+      background: rgb(255, 221, 227);
+      padding: 1rem;
+      border-radius: 20px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      width: 180px;
+    }
+
+    .card img {
+      width: 160px;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    .card h3 {
+      margin: 0.5rem 0;
+    }
+
+    .card button {
+      background: rgb(248, 248, 182);
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .cart {
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .cart ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .cart li {
+      margin-bottom: 0.5rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      background: rgb(114, 55, 64);
+      color: white;
+    }
+
+    .order-box {
+      margin: 1rem 0;
+    }
+
+    .order-box button {
+      background: rgb(250, 250, 176);
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 10px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .social-icons {
+      margin-top: 1rem;
+    }
+
+    .social-icons a {
+      margin: 0 0.5rem;
+      display: inline-block;
+    }
+
+    .social-icons img {
+      width: 24px;
+      height: 24px;
+      vertical-align: middle;
+    }
+
+    @media (max-width: 900px) {
+      .hero img {
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <strong>Banana Roll</strong>
+</header>
+
+<section class="hero">
+  <h1>BANANA ROLL</h1>
+  <p>banana roll nagih dan bikin kenyang</p>
+  <img src="https://i.pinimg.com/736x/e3/32/ec/e332ec3ecf95ce58564208293d09dcc5.jpg" alt="banana roll" />
+</section>
+
+<div class="description">
+  <p>Kami menjual banana roll dengan berbagai rasa dan kualitas premium. Rasa lembut dan manis cocok untuk semua kalangan. Coba sekarang juga!</p>
+</div>
+
+<section class="flavors">
+  <h2>PILIH RASA YANG KALIAN SUKA</h2>
+  <div class="bananayoy">
+    <div class="card">
+      <img src="https://i.pinimg.com/736x/c5/a3/a0/c5a3a05ddca24f234dc3515641258042.jpg" alt="Chocolate">
+      <h3>Chocolate</h3>
+      <p>Rp 13.000</p>
+      <button onclick="addToCart('Chocolate', 13000)">Tambahkan ke keranjang</button>
+    </div>
+    <div class="card">
+      <img src="https://i.pinimg.com/736x/23/d2/ad/23d2ade085b20f7bda02b36a167afb21.jpg" alt="Mix">
+      <h3>Mix</h3>
+      <p>Rp 13.000</p>
+      <button onclick="addToCart('Mix', 13000)">Tambahkan ke keranjang</button>
+    </div>
+    <div class="card">
+      <img src="https://i.pinimg.com/736x/d2/9a/79/d29a79c53a1ab388f10f0413724e7a54.jpg" alt="Strawberry">
+      <h3>Strawberry</h3>
+      <p>Rp 13.000</p>
+      <button onclick="addToCart('Strawberry', 13000)">Tambahkan ke keranjang</button>
+    </div>
+  </div>
+</section>
+
+<section class="cart">
+  <h3>KERANJANG</h3>
+  <ul id="cart-list"></ul>
+  <p><strong>Total: Rp <span id="total-price">0</span></strong></p>
+</section>
+
+<footer>
+  <p>Chat di WhatsApp</p>
+  <div class="order-box">
+    <button onclick="window.open('https://wa.me/6283896503466?text=Halo%2C%20saya%20ingin%20pesan%20Banana%20Roll', '_blank')">Pesan disini</button>
+  </div>
+
+  <div class="social-icons">
+    <a href="https://www.instagram.com/banana_roll29?igsh=MWdsMHgydzNjbGs5dA==" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram"></a>
+    <a href="https://www.tiktok.com/@banana_roll_?_t=ZS-8whoU5Jk2UR&_r=1" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TikTok"></a>
+    <a href="https://youtube.com/@bananaroll-x3h?si=b1GLK22vrvBFOd0U" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube"></a>
+    <a href="https://www.facebook.com/share/15LeSy4DdB/" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/145/145802.png" alt="Facebook"></a>
+  </div>
+</footer>
+
+<script>
+  let total = 0;
+
+  function addToCart(flavor, price) {
+    const list = document.getElementById('cart-list');
+    const item = document.createElement('li');
+    item.textContent = `${flavor} - Rp ${price.toLocaleString()}`;
+
+    const removeBtn = document.createElement('button');
+    removeBtn.textContent = ' ❌';
+    removeBtn.style.marginLeft = '10px';
+    removeBtn.style.background = 'transparent';
+    removeBtn.style.border = 'none';
+    removeBtn.style.cursor = 'pointer';
+    removeBtn.onclick = function () {
+      list.removeChild(item);
+      total -= price;
+      document.getElementById('total-price').textContent = total.toLocaleString();
+    };
+
+    item.appendChild(removeBtn);
+    list.appendChild(item);
+
+    total += price;
+    document.getElementById('total-price').textContent = total.toLocaleString();
+  }
+</script>
+
+</body>
+</html>
