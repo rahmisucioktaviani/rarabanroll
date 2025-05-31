@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Banana Roll</title>
   <style>
     body {
@@ -164,7 +164,9 @@
 </section>
 
 <div class="description">
-  <p>Kami menjual banana roll dengan berbagai rasa dan kualitas premium. Rasa lembut dan manis cocok untuk semua kalangan. Coba sekarang juga!</p>
+  <p>Nikmati camilan lezat yang nggak pernah gagal bikin nagih! Banana Roll kami terbuat dari roti tawar lembut yang digulung sempurna dengan pisang manis pilihan  lalu diisi dengan cokelat lumer atau kombinasi spesial cokelat-strawberry yang meleleh di mulut.
+Sekali coba, dijamin nggak cukup satu!
+Pesan sekarang dan rasakan perpaduan manis, renyah, dan lumer yang bikin hari kamu lebih spesial!</p>
 </div>
 
 <section class="flavors">
@@ -200,19 +202,39 @@
 <footer>
   <p>Chat di WhatsApp</p>
   <div class="order-box">
-    <button onclick="window.open('https://wa.me/6283896503466?text=Halo%2C%20saya%20ingin%20pesan%20Banana%20Roll', '_blank')">Pesan disini</button>
+    <button id="wa-order-btn">Pesan disini</button>
   </div>
 
   <div class="social-icons">
-    <a href="https://www.instagram.com/banana_roll29?igsh=MWdsMHgydzNjbGs5dA==" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram"></a>
-    <a href="https://www.tiktok.com/@banana_roll_?_t=ZS-8whoU5Jk2UR&_r=1" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TikTok"></a>
-    <a href="https://youtube.com/@bananaroll-x3h?si=b1GLK22vrvBFOd0U" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube"></a>
+    <a href="https://www.instagram.com/banana_roll29" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram"></a>
+    <a href="https://www.tiktok.com/@banana_roll_" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TikTok"></a>
+    <a href="https://youtube.com/@bananaroll-x3h" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube"></a>
     <a href="https://www.facebook.com/share/15LeSy4DdB/" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/145/145802.png" alt="Facebook"></a>
   </div>
 </footer>
 
 <script>
   let total = 0;
+  const cartItems = [];
+
+  function updateWhatsAppLink() {
+    const baseUrl = "https://wa.me/6283896503466?text=";
+    let message = "Halo, saya ingin pesan Banana Roll:%0A";
+
+    cartItems.forEach((item, index) => {
+      message += `${index + 1}. ${item.flavor} - Rp ${item.price.toLocaleString()}%0A`;
+    });
+
+    message += `%0ATotal: Rp ${total.toLocaleString()}`;
+    const encodedURL = baseUrl + encodeURIComponent(decodeURIComponent(message));
+
+    const waBtn = document.getElementById('wa-order-btn');
+    if (waBtn) {
+      waBtn.onclick = function () {
+        window.open(encodedURL, '_blank');
+      };
+    }
+  }
 
   function addToCart(flavor, price) {
     const list = document.getElementById('cart-list');
@@ -225,19 +247,28 @@
     removeBtn.style.background = 'transparent';
     removeBtn.style.border = 'none';
     removeBtn.style.cursor = 'pointer';
+
+    const cartItemObj = { flavor, price };
+    cartItems.push(cartItemObj);
+    total += price;
+    document.getElementById('total-price').textContent = total.toLocaleString();
+
     removeBtn.onclick = function () {
       list.removeChild(item);
-      total -= price;
-      document.getElementById('total-price').textContent = total.toLocaleString();
+      const index = cartItems.indexOf(cartItemObj);
+      if (index > -1) {
+        cartItems.splice(index, 1);
+        total -= price;
+        document.getElementById('total-price').textContent = total.toLocaleString();
+        updateWhatsAppLink();
+      }
     };
 
     item.appendChild(removeBtn);
     list.appendChild(item);
-
-    total += price;
-    document.getElementById('total-price').textContent = total.toLocaleString();
+    updateWhatsAppLink();
   }
 </script>
 
 </body>
-</html>
+                                                                        </html>
